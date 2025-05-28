@@ -1,0 +1,14 @@
+deep_translator==1.11.4
+language_tool_python==2.9.3
+Pillow==11.2.1
+PyAutoGUI==0.9.54
+PyQt5==5.15.11
+PyQt5_sip==12.17.0
+pytesseract==0.3.13
+Requests==2.32.3
+pyinstaller
+
+
+
+
+

@@ -223,7 +223,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_move">
+        <widget class="QPushButton" name="pushButton_maximize">
          <property name="text">
           <string/>
          </property>
@@ -231,6 +231,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_minimize">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_move">
          <property name="text">
           <string/>
          </property>
@@ -265,6 +272,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_correct_text">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_variant">
          <property name="text">
           <string/>
          </property>

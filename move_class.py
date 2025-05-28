@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QToolButton, QPushButton, QMessageBox
 from PyQt5.QtCore import Qt
+from screen_scale import ScreenSize
 
 class MoveClass:
-    def __init__(self, widget, screen_w, screen_h):
+    def __init__(self, widget):
         self.initial_pos = None
         self.widget = widget
-        self.screen_w = screen_w
-        self.screen_h = screen_h
+        self.screen_w, self.screen_h, self.screen_scale = ScreenSize().values()
 
 
     def move_button_mouse_press_event(self, event):
@@ -23,7 +23,7 @@ class MoveClass:
         elif isinstance(self.widget, QMessageBox):
             QMessageBox.mousePressEvent(self.widget, event)
         else:
-            print('Tanımlanmayan Widget türü')
+            pass
         event.accept()
         
     def move_button_mouse_move_event(self,event):
@@ -42,7 +42,7 @@ class MoveClass:
         elif isinstance(self.widget, QMessageBox):
             QMessageBox.mouseMoveEvent(self.widget, event)
         else:
-            print('Tanımlanmayan Widget türü')
+            pass
         event.accept()
 
     def move_button_mouse_release_event(self, event = None):    #burda eventi varsayılan olarak none ayarlamamızın sebebi;
@@ -77,5 +77,5 @@ class MoveClass:
             elif isinstance(self.widget, QMessageBox):
                 QMessageBox.mouseReleaseEvent(self.widget, event)
             else:
-                print('Tanımlanmayan Widget türü')
+                pass
             event.accept()

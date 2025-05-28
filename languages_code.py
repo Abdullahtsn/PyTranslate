@@ -1,11 +1,11 @@
 
-tool_and_translate_matching = {
+tool_and_translate_matching_variant = {
     'Auto': {'language_tool':'auto', 'deep_translator': 'auto'},
     'Arabic (Generic)': {'language_tool':'ar', 'deep_translator': 'ar'},
     'Belarusian (Belarus)': {'language_tool':'be-BY', 'deep_translator': 'be'},
     'Belarusian (Generic)': {'language_tool':'be', 'deep_translator': 'be'},
-    'Brazilian French': {'language_tool':'br-FR', 'deep_translator': 'br'},
-    'Brazilian Portuguese (Generic)': {'language_tool':'br', 'deep_translator': 'br'},
+    'Brazilian French': {'language_tool':'pt-FR', 'deep_translator': 'pt'},
+    'Brazilian Portuguese (Generic)': {'language_tool':'pt', 'deep_translator': 'pt'},
     'Catalan (Balearic)': {'language_tool':'ca-ES-balear', 'deep_translator': 'ca'},
     'Catalan (Generic)': {'language_tool':'ca', 'deep_translator': 'ca'},
     'Catalan (Spain)': {'language_tool':'ca-ES', 'deep_translator': 'ca'},
@@ -47,7 +47,6 @@ tool_and_translate_matching = {
     'Japanese (Generic)': {'language_tool':'ja', 'deep_translator': 'ja'},
     'Japanese (Japan)': {'language_tool':'ja-JP', 'deep_translator': 'ja'},
     'Norwegian (Generic)': {'language_tool':'no', 'deep_translator': 'no'},
-    'Norwegian Bokmål (Generic)': {'language_tool':'nb', 'deep_translator': 'no'},
     'Persian (Generic)': {'language_tool':'fa', 'deep_translator': 'fa'},
     'Persian (Iran)': {'language_tool':'fa-IR', 'deep_translator': 'fa'},
     'Polish (Generic)': {'language_tool':'pl', 'deep_translator': 'pl'},
@@ -75,7 +74,92 @@ tool_and_translate_matching = {
     'Ukrainian (Ukraine)': {'language_tool':'uk-UA', 'deep_translator': 'uk'},
 }
 
-tesseract_lang = {}
+
+tool_and_translate_matching_base = {
+    'Auto': {'language_tool':'auto', 'deep_translator': 'auto'},
+    'Arabic': {'language_tool':'ar', 'deep_translator': 'ar'},
+    'Belarusian': {'language_tool':'be', 'deep_translator': 'be'},
+    'Brazilian Portuguese': {'language_tool':'pt', 'deep_translator': 'pt'},
+    'Catalan': {'language_tool':'ca', 'deep_translator': 'ca'},
+    'Chinese (Tc)': {'language_tool':'zh', 'deep_translator': 'zh-TW'},
+    'Chinese (Sc)': {'language_tool':'zh-CN', 'deep_translator': 'zh-CN'},
+    'Danish': {'language_tool':'da', 'deep_translator': 'da'},
+    'Dutch': {'language_tool':'nl', 'deep_translator': 'nl'},
+    'English': {'language_tool':'en', 'deep_translator': 'en'},
+    'Esperanto': {'language_tool':'eo', 'deep_translator': 'eo'},
+    'Filipino': {'language_tool':'tl', 'deep_translator': 'tl'},
+    'French': {'language_tool':'fr', 'deep_translator': 'fr'},
+    'Galician': {'language_tool':'gl', 'deep_translator': 'gl'},
+    'German': {'language_tool':'de', 'deep_translator': 'de'},
+    'Irish': {'language_tool':'ga', 'deep_translator': 'ga'},
+    'Italian': {'language_tool':'it', 'deep_translator': 'it'},
+    'Japanese': {'language_tool':'ja', 'deep_translator': 'ja'},
+    'Norwegian': {'language_tool':'no', 'deep_translator': 'no'},
+    'Persian': {'language_tool':'fa', 'deep_translator': 'fa'},
+    'Polish': {'language_tool':'pl', 'deep_translator': 'pl'},
+    'Portuguese': {'language_tool':'pt', 'deep_translator': 'pt'},
+    'Romanian': {'language_tool':'ro', 'deep_translator': 'ro'},
+    'Russian': {'language_tool':'ru', 'deep_translator': 'ru'},
+    'Slovak': {'language_tool':'sk', 'deep_translator': 'sk'},
+    'Slovenian': {'language_tool':'sl', 'deep_translator': 'sl'},
+    'Spanish': {'language_tool':'es', 'deep_translator': 'es'},
+    'Swedish': {'language_tool':'sv', 'deep_translator': 'sv'},
+    'Turkish': {'language_tool':None, 'deep_translator': 'tr'},
+    'Ukrainian': {'language_tool':'uk', 'deep_translator': 'uk'},
+}
+
+tesseract_dict = {
+    "Arabic": "ara",
+    "Belarusian": "bel",
+    "Portuguese": "por",
+    "Catalan": "cat",
+    "Chinese (Tc)": "chi_tra",
+    "Chinese (Tc) - Vertical": "chi_tra_vert",
+    "Chinese (Sc)": "chi_sim",
+    "Chinese (Sc) - Vertical": "chi_sim_vert",
+    "Danish": "dan",
+    "Dutch": "nld",
+    "English": "eng",
+    "Esperanto": "epo",
+    "Filipino": "tgl",  
+    "French": "fra",
+    "Galician": "glg",
+    "German": "deu",
+    "Irish": "gle",
+    "Italian": "ita",
+    "Japanese": "jpn",
+    "Norwegian": "nor",
+    "Persian": "fas",
+    "Polish": "pol",
+    "Portuguese": "por",
+    "Romanian": "ron",
+    "Russian": "rus",
+    "Slovak": "slk",
+    "Slovenian": "slv",
+    "Spanish": "spa",
+    "Swedish": "swe",
+    "Turkish": "tur",
+    "Ukrainian": "ukr",
+}
+
+
+
+
+
+'''for i in tool_and_translate_matching_base.keys():
+    print(i)'''
+
+
+### tesseract için dil paketlerini yüklememiz için uygulamada olan dillerin tespiti için dicti döngüye alıp genel dil kısaltmalarını alıp bunları set() e ekliyoruz(aynı kısaltmalar sadece bir kere olsun diye set() kullanıyoruz)###
+### eğer yukardaki dillerde değişiklik yaparsan aşağıdaki yorumu çalıştır yeni halini direk versin elle yazmakla uğraşma.###
+'''
+langcode_for_tesseract = set()
+for lang_code in tool_and_translate_matching.values():
+    langcode_for_tesseract.add(lang_code['deep_translator'])
+langcode_for_tesseract.remove('auto')
+print(langcode_for_tesseract)
+
+'''
 
 #tool_and_translate_matching['Slovenian (Generic)']['language_tool']
 #tool_and_translate_matching['Slovenian (Generic)']['deep_translator']
@@ -232,7 +316,7 @@ tesseract_lang = {}
 
 
 
-
+pt
 language_tool_paython_support_lang = {
     'nl', 
     'br-FR', 
