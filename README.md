@@ -41,7 +41,7 @@ Yani:
 
 Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyasını indirebilirsin:
 
-📥 [PyTranslate - (Setup.exe)]()
+📥 [PyTranslate Kurulum Dosyasını İndir](https://github.com/Abdullahtsn/PyTranslate/releases/tag/v1.0.0)
 
 > ⚠️ **Not:** Kurulum dosyası (`setup.exe`), PyTranslate’in bağımsız olarak çalışabilmesi için hazırlanmıştır.  
 > Yani Python ya da ek kütüphaneler sisteminde kurulu olmasa bile, bu kurulum dosyası sayesinde uygulamayı doğrudan çalıştırabilirsin.  
@@ -219,7 +219,7 @@ In other words:
 
 You can download the setup file from the link below to run independently on any system:
 
-📥 [PyTranslate - (Setup.exe)]()
+📥 [Download PyTranslate Setup File](https://github.com/Abdullahtsn/PyTranslate/releases/tag/v1.0.0)
 
 > ⚠️ **Note:** The setup file (`setup.exe`) is prepared so that PyTranslate can run independently.  
 > That means even if Python or additional libraries are not installed on your system, you can run the application directly with this setup file.  
