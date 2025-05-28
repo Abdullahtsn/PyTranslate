@@ -12,7 +12,7 @@ PyTranslate, ekranın herhangi bir köşesinde yer alabilen küçük bir araç �
 
 -🔹 **Metin tabanlı çeviri**  
 -🔹 **Anlık ekran üzerindeki yazıyı tanıma ve çeviri (OCR destekli)**  
--🔹 **Minimum dikkat dağılımı, maksimum verimlilik**
+-🔹 **Minimum dikkat dağınıklığı, maksimum verimlilik**
 
 Yani:  
 **“İşimden kopmadan çeviri yapmamı sağlayan kişisel bir yardımcı.”**
@@ -161,6 +161,7 @@ Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyas�
 ## 🎨 Tema Galerisi - Theme Gallery
 <p style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
     <img src="app_image/thema.png" style="border-radius: 8px;" />
+    <img src="app_image/vertical_minimalist.png" style="height: 322; border-radius: 8px;" />
     <img src="app_image/Cloudlight Bloom.png" style="width: 48%; border-radius: 8px;" />
     <img src="app_image/Dark Mocha.png" style="width: 48%; border-radius: 8px;" />
     <img src="app_image/Deep Blue Night.png" style="width: 48%; border-radius: 8px;" />
