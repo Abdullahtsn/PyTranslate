@@ -34,7 +34,7 @@ class TranslateApp(QMainWindow):
         self.setWindowIcon(QIcon(QPixmap(os.path.join(self.path_temp, 'icon','icon.ico'))))
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)       #mainwindow için arka planı görünmez yapıyor sadece widgetler görünüyor.(frameleswindowhint ile birlikte kullanılıyor.)
-        self.toolbutton_size = (20*self.screen_scale, 20*self.screen_scale)
+        self.toolbutton_size = (int(20*self.screen_scale), int(20*self.screen_scale))
         
         self.widgets_load()
         self.resize(QSize(self.toolbar.sizeHint()))      #başlangıçta sadece toolbarı göstercek şekilde açılması için.

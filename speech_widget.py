@@ -31,8 +31,8 @@ class SpeechWidget(QWidget):
         self.combobox_dict = tool_and_translate_matching_base
         #self.pano = QApplication.clipboard()     #nadiren kullanılcağı için bu şekilde bellekte tutmak gereksiz. kopyala yapıştır butonlarında çağırmak en mantıklısı sürekli kullanmıycağımız için.
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
-        self.resize(540*self.screen_scale, 456*self.screen_scale)
-        self.button_icon_size = (20*self.screen_scale, 20*self.screen_scale)
+        self.resize(int(540*self.screen_scale), int(456*self.screen_scale))
+        self.button_icon_size = (int(20*self.screen_scale), int(20*self.screen_scale))
        
         self.install_icons()
         self.button_clicks()        #tüm pushbuttonları 'pushButton_' böyle başlat. 
@@ -92,7 +92,7 @@ class SpeechWidget(QWidget):
         for combobox in [self.ui.comboBox_source, self.ui.comboBox_target]: 
             view = QListView()
             view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)    #comboboxun içine scrollbar eklemek için. (comboboxa eklenen itemler fazla olunca scrolbar yerine aşağıda ve yukarda buton çıkıyor.)
-            view.setViewportMargins(0,0,4*self.screen_scale,0) 
+            view.setViewportMargins(0,0,int(4*self.screen_scale),0) 
             combobox.setMaxVisibleItems(10)  #comboboxda aynı anda gösterilcek item sayısı sınırlama
             combobox.setView(view)
             combobox.setSizeAdjustPolicy(combobox.SizeAdjustPolicy.AdjustToContents)       #normalde comboboxun itemlerini değiştirince yeni itemlere göre combobuxu büyütüp küçültmüyordu, baştaki ayarlara göre sabit kalıyordu. oluştururkenki ayarlara göre yani. bu satır ile eklenen her öğeye göre boyutlanması yeniden yapılıyor.
@@ -125,7 +125,7 @@ class SpeechWidget(QWidget):
 
     
     def layout_settings(self):
-        m_s_r = 6*self.screen_scale   #m_s_r ---> margin_spacer_ratio anlamında kısalttım
+        m_s_r = int(6*self.screen_scale)   #m_s_r ---> margin_spacer_ratio anlamında kısalttım
         self.setContentsMargins(m_s_r, 0, m_s_r, 0)     #burası text editlerin ana pencere kenarlarında sıfır olarak durmasını engellemek için yazıldı. yani hafif bi kenarlıkmış gibi görünmesi için
         self.ui.layout_toolbar.setContentsMargins(m_s_r, m_s_r, m_s_r, m_s_r)
         self.ui.layout_source_button.setContentsMargins(m_s_r, m_s_r, m_s_r, m_s_r)
@@ -136,8 +136,8 @@ class SpeechWidget(QWidget):
         self.ui.layout_target_button.setSpacing(m_s_r)
         self.ui.layout_combobox.setSpacing(m_s_r)
 
-        self.ui.textEdit_source.setViewportMargins(0,0,4*self.screen_scale,0)   #texteditin içinde metin scroolbara fazla yakın oluyordu ve paddingle marginle ayarlanmıyordu. bizde metni scrollbardan bu şekilde uzaklaştırıyoruz.
-        self.ui.textEdit_source.setViewportMargins(0,0,4*self.screen_scale,0)   #Soldan 0 px, Yukarıdan 0 px, Sağdan 20 px (yani metin scrollbar’dan 8 px uzağa çekilir) , Alttan 0 px
+        self.ui.textEdit_source.setViewportMargins(0,0,int(4*self.screen_scale),0)   #texteditin içinde metin scroolbara fazla yakın oluyordu ve paddingle marginle ayarlanmıyordu. bizde metni scrollbardan bu şekilde uzaklaştırıyoruz.
+        self.ui.textEdit_source.setViewportMargins(0,0,int(4*self.screen_scale),0)   #Soldan 0 px, Yukarıdan 0 px, Sağdan 20 px (yani metin scrollbar’dan 8 px uzağa çekilir) , Alttan 0 px
         
 
     def change_language_button_click(self):

@@ -17,7 +17,7 @@ import pytesseract
 
 path_temp, path_exe = ExeScriptPath().paths()   #burda classın içinde selfle belirtmememin sebebi uygulama başlamadan önce pytesseractın yolunu veriyoruz. paketleme yaparken exenin yanında olacak dil paketleri o yüzden konumu burda alıyoruz.. yine initte tanımlamasını yapıyoruz.
 
-pytesseract.pytesseract.tesseract_cmd = os.path.join(path_exe, 'Tesseract-OCR','tesseract.exe')
+pytesseract.pytesseract.tesseract_cmd = os.path.normpath(os.path.join(path_exe, 'Tesseract-OCR','tesseract.exe'))
 
 
 class SRubberBand(QRubberBand):
@@ -49,9 +49,9 @@ class ImageWidget(QWidget):
         #self.setWindowOpacity(0.85)
         self.setContentsMargins(0,0,0,0)
         self.rubber_band = SRubberBand(QRubberBand.Shape.Rectangle, self)
-        pixmap = QPixmap(os.path.join(self.path_temp, 'icon','cursor.png')).scaled(30*self.screen_scale,30*self.screen_scale, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        pixmap = QPixmap(os.path.join(self.path_temp, 'icon','cursor.png')).scaled(int(30*self.screen_scale),int(30*self.screen_scale), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         pixmap_hot_x = round(pixmap.width()/2)
-        pixmap_hot_y = round((pixmap.height()/2) - 8*self.screen_scale)
+        pixmap_hot_y = round((pixmap.height()/2) - int(8*self.screen_scale))
         self.special_cursor = QCursor(pixmap, hotX = pixmap_hot_x, hotY = pixmap_hot_y)     #burdaki hotx ve hoty farenin ana tıklama noktasını belirtiyor piksel olarak. resmin hangi bölgesinin tıklama noktası olacağı kısaca.
                                                                                             #eğer hotx ve hotyyi vermezsek sol üst köşeyi tıklama noktası alıyor verdiğimiz resimin yani (0,0). bizim fare işaretçimizin okunun ucu sol üstten değil ortadan başladığı için o konumu ona veriyoruz.
         #self.setCursor(Qt.CursorShape.CrossCursor)      #kırpma işaretine çevirme
@@ -69,7 +69,7 @@ class ImageWidget(QWidget):
         view = QListView() 
         view.setCursor(self.special_cursor)     #normalde bu widgetin hepsine uyguluyor cursoru ama listviewi burda oluşturduğumuz için comboboxu açınca burda fare normal varsayılanına dönüyordu listedeyken. o yüzden buna da ayrıca uyguluyoruz.
         view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)    #comboboxun içine scrollbar eklemek için. (comboboxa eklenen itemler fazla olunca scrolbar yerine aşağıda ve yukarda buton çıkıyor.)
-        view.setViewportMargins(0,0,4*self.screen_scale,0) 
+        view.setViewportMargins(0,0,int(4*self.screen_scale),0) 
         self.combobox = QComboBox(self)
         self.combobox.setMaxVisibleItems(10)  #self.comboboxda aynı anda gösterilcek item sayısı sınırlama
         self.combobox.setView(view)
@@ -79,7 +79,7 @@ class ImageWidget(QWidget):
         self.combobox.addItems(tesseract_dict.keys())
         '''self.combobox.setCurrentText(self.combobox_first_item)'''
         self.combobox.setCurrentText('English')
-        self.combobox.move(round((self.screen_w/2)-(self.combobox.size().width()/2)),round((14*self.screen_scale)))                                                                
+        self.combobox.move(round((self.screen_w/2)-(self.combobox.size().width()/2)),round((int(14*self.screen_scale))))                                                                
         #self.combobox.currentTextChanged.connect(self.combobox_change_language)        #burası normalde uygulama açılırken select language diye açılıyordu. bu değiştikten sonra comboboxu  gizliyorduk. ama her defasında tekrar tekrar dil seçimi yapmak yerine varsayılan olarak ingilizce kullanılıp comboboxun kaybolmasını iptal etmek  daha mantıklı geldi.
         
     def combobox_change_language(self):     #combobox değiştikten sonraki gerçekleşicek işlemler. ama şuan çalışmıyor yukarısı yorum satırı haline getirildi.
@@ -94,8 +94,13 @@ class ImageWidget(QWidget):
         self.main_window.show()
 
     def image_to_text(self, image):
-        text = pytesseract.image_to_string(image, tesseract_dict[self.combobox.currentText()])
-        self.signal.emit(text)
+        try:
+            text = pytesseract.image_to_string(image, tesseract_dict[self.combobox.currentText()])
+            
+        except pytesseract.pytesseract.TesseractError:
+            self.main_window.msg_box.edit('The file path contains space characters, so the path could not be read. Please change the file location so that it does not contain any space characters.') 
+        else:
+            self.signal.emit(text)
 
     def mousePressEvent(self, event  = QMouseEvent):
         '''if self.combobox.isHidden():'''
