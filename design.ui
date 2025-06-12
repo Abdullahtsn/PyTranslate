@@ -271,7 +271,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_correct_text">
+        <widget class="QPushButton" name="pushButton_correct_grammar">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_correct_word">
          <property name="text">
           <string/>
          </property>

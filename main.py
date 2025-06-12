@@ -10,9 +10,9 @@ from msgbox_widget import MsgBox            #messagebox widgeti
 from style_sheet import ThemaClass, ThemaDict     #bunları uygulamanın daha oluşturulma aşamasında kullanacağımız için direk genel değişken olarak alıyoruz. def initte tanımlarsak win oluşmadan bunlara ulaşamıyoruz.
 from exe_script_path_class import ExeScriptPath     #çalışma yeri exemi sciprtmi diye kontrol edip buna göre yol belirlediğimiz singleton desenle oluşturulmuş class
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QToolBar, QToolButton, QAction, QMenu
+from PyQt5.QtWidgets import QMainWindow, QApplication, QToolBar, QToolButton, QAction, QMenu, QShortcut
 from PyQt5.QtCore import Qt, QSize, QPropertyAnimation, QEasingCurve
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import QIcon, QPixmap, QKeySequence
 
 
 
@@ -39,6 +39,7 @@ class TranslateApp(QMainWindow):
         self.widgets_load()
         self.resize(QSize(self.toolbar.sizeHint()))      #başlangıçta sadece toolbarı göstercek şekilde açılması için.
         self.move_button_clicked()      #move butonuna tıklanınca pencerenin hareket etmesi için. bunu özel tanımlıyoruz çünkü pyqtnin hazır fonksiyonlarını override ediyoruz.
+        self.shortcut_widget()
         self.animations_create()
         
 
@@ -61,6 +62,8 @@ class TranslateApp(QMainWindow):
 
 
     def widgets_load(self):
+       
+
         self.toolbar = QToolBar('ToolBar', self)
         self.toolbar.setIconSize(QSize(self.toolbutton_size[0], self.toolbutton_size[1]))
         layout = self.toolbar.layout()
@@ -73,8 +76,8 @@ class TranslateApp(QMainWindow):
         self.addToolBar(self.toolbar)  #direk en üste eklemesi için. çünkü mainwindowu buna göre ayarlıyoruz.
 
         toolbutton_str = [
-            ('text','Text', 'action'),
-            ('image_text','Image Text','action'),
+            ('text','Text ( Alt+1 )', 'action'),
+            ('image_text','Image Text ( Alt+2 )','action'),
             ('transparent','Transparent','action'),
             ('pinned','Pinned','action'),        
             ('rotation','Rotation','action'),
@@ -82,7 +85,7 @@ class TranslateApp(QMainWindow):
             ('expand','Expand','action'),
             ('move','Move','toolbutton'),       #move butonuna basılı tutulunca hareket etmesini override etmek için toolbutton sınıfını oluşturmamız lazım. çünkü action sınıfı sadece tıklamaları falan sinayle bağlıyor. onun move,press gibi yöntemleri olmadığı için override edemiyoruz. o yüzden sadece move butonu için action değilde toolbutton oluşturuyoz.
             ('minimize','Minimize','action'),
-            ('close','Close','action')
+            ('close','Close ( Esc )','action')
         ]
 
         self.toolbar_widget_dict = {}       #bunu liste olarakta yapabilirdik ama o zaman butonlara teker teker ulaşamıyoruz o yüzden bunu dict olarak tanımlıyoruz. eğer tekil olarak ulaşmak istersek ulaşabiliyoruz.        
@@ -96,7 +99,7 @@ class TranslateApp(QMainWindow):
             if widgettype == 'action':
                 png = QIcon(os.path.join(self.path_temp, 'icon',f'{png_path}.png'))
                 button = QAction(png, text, self)
-                button.setObjectName(text)
+                button.setObjectName(png_path)
                 button.triggered.connect(getattr(self, f'{png_path}_button_clicked'))       #getattr bir objenin içindeki bir özelliğe (ya da fonksiyona) string olarak ulaşmanı sağlar. 
                                                                                             #yukarda butonlar için oluşturduğumuz fonksiyonları burda str olarka tanımlıyorum getattr ile. bu işe yarıyor.
                 #toolbutton_list.append(button)
@@ -111,7 +114,7 @@ class TranslateApp(QMainWindow):
                                                     #sonradan dahil ettiğim bi thema butonu var belki başka butonlarda dahil ederim diye burayada bi toolbutton fonksiyonu tanımlaması yaptık. 
                 png = QIcon(os.path.join(self.path_temp, 'icon',f'{png_path}.png'))
                 button = QToolButton(self)
-                button.setObjectName(text)
+                button.setObjectName(png_path)
                 button.setIcon(png)
                 button.setToolTip(text)
                 '''if png_path != 'move' and png_path != 'thema':      #tek bir toolbuttonda tıklamaya göre fonksiyona göndermiycez oda move.
@@ -161,6 +164,8 @@ class TranslateApp(QMainWindow):
         if self.toolbar_widget_dict['text']['widget'].isChecked():
             self.speech_widget.show()
         else:
+            self.speech_widget.ui.pushButton_clear_s.click()    #speechwidget kapanırken metinleri temizliyoruz. sonraki açılışta önceki metinini kalmamaası için.
+            self.speech_widget.ui.pushButton_clear_t.click()
             self.speech_widget.close()
 
 
@@ -183,6 +188,8 @@ class TranslateApp(QMainWindow):
             self.speech_widget.ui.textEdit_source.setPlainText(text)
             if not self.toolbar_widget_dict['text']['widget'].isChecked():
                 self.toolbar_widget_dict['text']['widget'].trigger()
+            else:
+                self.speech_widget.raise_()     #eğer speechwidget açıksa ama arka planda kalmışsa resimden sonra o widgeti öne getirmiyordu. raise ile widget açıksa öne getiriyoruz.
         else:
             pass
 
@@ -278,6 +285,11 @@ class TranslateApp(QMainWindow):
         self.toolbar_widget_dict['move']['widget'].mouseMoveEvent = self.move_class.move_button_mouse_move_event
         self.toolbar_widget_dict['move']['widget'].mouseReleaseEvent = self.move_class.move_button_mouse_release_event
         
+    def shortcut_widget(self):
+        QShortcut(QKeySequence('Alt+1'), self).activated.connect(self.toolbar_widget_dict['text']['widget'].trigger)
+        QShortcut(QKeySequence('Alt+2'), self).activated.connect(self.toolbar_widget_dict['image_text']['widget'].trigger)
+        QShortcut(QKeySequence('Esc'), self).activated.connect(self.toolbar_widget_dict['close']['widget'].trigger)
+
     def closeEvent(self, event): 
         self.speech_widget_close_signal()   #eğer speechwidget açıksa toolbardan çıkılırken onunda kapatılması için.
         super().closeEvent(event)
@@ -288,8 +300,7 @@ def app():
     app.setStyle('Fusion')          #genel pencere tasarımını değiştiriyor .en moderdi bu. diğer seçenekler arasında windowsvista ve Windows var. onlar çok eski ve kötü gözüküyor.
     ThemaClass.update(ThemaDict['Dark Mocha'])              #uygulama ilk başlarken ki uygulanacak olan tema.   
     app.setStyleSheet(ThemaClass.update_style_sheet())      #update fonksiyonu ile renkleri değiştirdikten sonra update fonksiyonunu tekrar hazırlayıp return ile bunu döndürüyoruz.  
-                                                            #uygulamayı böyle başlatınca tüm oluşturduğum ayrı penceredeki widgetlere tek tek stylesheet yapmak zorunda kalmıyom. burdan uygulayınca direk mainwindowa bağlı tüm widgetlere uygulanıyor. penceresi olan widgetler için tek tek 200 satırlık stylesheet import edip bide tüm o içindeki widgetlere uygulamam gerekmiyor.
-                                                            
+                                                            #uygulamayı böyle başlatınca tüm oluşturduğum ayrı penceredeki widgetlere tek tek stylesheet yapmak zorunda kalmıyom. burdan uygulayınca direk mainwindowa bağlı tüm widgetlere uygulanıyor. penceresi olan widgetler için tek tek 200 satırlık stylesheet import edip bide tüm o içindeki widgetlere uygulamam gerekmiyor.                                    
     win = TranslateApp()                                    #eğer win oluşturulduktan sonra app.setstylesheet yaparsan uygulama oluşturulduğu için kesik kesik görünüyor boyutlandırmalar değiştiği için. o yüzden win oluşturulmadan önce yapmayı unutma app.setstylesheeti
     win.show()
     sys.exit(app.exec_())

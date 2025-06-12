@@ -14,9 +14,9 @@ class ScreenSize:               #genel özet ; sadece bir kere hesaplanıcak de�
             cls._instance.width = w
             cls._instance.height = h
             
-            if (w,h) in [(1280, 720) ,(1366, 768), (1280, 1024), (1600, 1200)]:
+            if (w,h) in [(800, 600), (1024, 768), (1128, 634), (1152, 864), (1280, 720), (1280, 960), (1280, 1024), (1366, 768), (1440,900), (1600, 900), (1600, 1200)]:
                 cls._instance.scale = 1
-            elif (w,h) in [(1920, 1080), (1920, 1200)]:
+            elif (w,h) in [(1680, 1050), (1760, 990), (1920, 1080), (1920, 1200)]:
                 cls._instance.scale = 1.5
             elif (w, h) in [(2560, 1440), (2560, 1600), (3440, 1440)]:
                 cls._instance.scale = 2
@@ -27,7 +27,7 @@ class ScreenSize:               #genel özet ; sadece bir kere hesaplanıcak de�
             elif (w, h) == (7680, 4320):
                 cls._instance.scale = 6
             else:
-                cls._instance.scale = 2
+                cls._instance.scale = 1
                 
         return cls._instance
     

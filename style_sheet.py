@@ -132,7 +132,7 @@ class Thema:
                                             açılır menüsü qlistviewe dönüşüyor galiba yani stil tanımlamalarına qlistviewide eklemememiz gerekiyor*/
                         background-color: {self.combobox_bg};          
                         color: {self.combobox_color}; 
-                        border: {round(1*screen_scale)}px ridge {self.combobox_border};
+                        border: {1*screen_scale}px ridge {self.combobox_border};
                         border-radius: {2*screen_scale}px;
                         padding: {4*screen_scale}px;
                         padding-left: {8*screen_scale}px;
@@ -212,7 +212,6 @@ class Thema:
                         selection-color: {self.textedit_selectcolor};
                         border: {2*screen_scale}px solid {self.textedit_border};
                         padding: {6*screen_scale}px;
-                        font:  {10*screen_scale}px;
                         }}
                             QCheckBox::indicator {{
                         width: {20*screen_scale}px;

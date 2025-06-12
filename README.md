@@ -21,10 +21,10 @@ Yani:
 
 ## 🎯 Neden PyTranslate?
 
-- ✅ Arka planda web sitesi açık tutma derdi yok  
-- ✅ Görselden çeviri için karmaşık adımlar yok  
-- ✅ Her şey hızlı, sade ve erişilebilir  
-- ✅ Çalışma akışını bölmeden yardımcı olur
+- ✅ Arka planda web sitesi açık tutma derdi yok.  
+- ✅ Görselden çeviri için karmaşık adımlar yok.  
+- ✅ Her şey hızlı, sade ve erişilebilir.  
+- ✅ Çalışma akışını bölmeden yardımcı olur.
 
 ## 📄 Nasıl Çalışır?
 
@@ -32,9 +32,11 @@ Yani:
 - Kullanıcıya **metin çevirme** veya **resimdeki metni algılayıp çevirme** seçenekleri sunar.  
 - Yazılım dili: **Python**  
 - Arayüz: **PyQt5**  
-- OCR (görüntüden metin algılama) işlemi için: **pytesseract** ve onun dil modelleri  
-- Çeviri işlemleri için: **deep-translator** kütüphanesi  
-- Kelime düzeltme için: **language-tool-python** kullanılır  
+- OCR (görüntüden metin algılama) öncesi resmi filtreleme işlemi için: **open-cv** kütüphanesi ,
+- OCR (görüntüden metin algılama) işlemi için: **pytesseract** kütüphanesi ve onun dil modelleri ,
+- Çeviri işlemleri için: **deep-translator** kütüphanesi ,
+- Dil bilgisi düzeltme için: **language-tool-python** kütüphanesi ,
+- Kelime düzeltme için: **pyspellchecker** kütüphanesi kullanılır  
 - Projeyle ilgili tüm kütüphane ve bağımlılıklar `requirements.txt` dosyasında listelenmiştir.
 
 ## 📦 İndir
@@ -54,7 +56,7 @@ Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyas�
 
 <p>
   <img src="icon/close.png" width="36" style="vertical-align: middle;"/>
-  <strong>Çıkış:</strong> Uygulamayı kapatır.
+  <strong>Çıkış ( ESC ) :</strong> Uygulamayı kapatır.
 </p>
 
 <p>
@@ -81,12 +83,12 @@ Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyas�
 
 <p>
   <img src="icon/text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Metin Çevirisi:</strong> Metin Çeviri penceresini açar.
+  <strong>Metin Çevirisi  ( Alt + 1 ) :</strong> Metin Çeviri penceresini açar.
 </p>
 
 <p>
   <img src="icon/image_text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Ekran Çevirisi:</strong> Ekrandan seçilen bölgedeki metinleri algılar, metin çevirisine gönderir. (Dil seçimine göre algılama yapar.)
+  <strong>Ekran Çevirisi ( Alt + 2 ) :</strong> Ekrandan seçilen bölgedeki metinleri algılar, metin çevirisine gönderir. (Açılan pencerede ki ekranın üst orta bölgesinde bulunan dil seçimine göre algılama yapar.)
 </p>
 
 <p>
@@ -127,18 +129,23 @@ Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyas�
 </p>
 
 <p>
-  <img src="icon/correct_text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Kelime Düzeltme:</strong> Çevrilecek metindeki kelime yanlışlarını düzeltir. (Türkçe dil desteği yok.)
+  <img src="icon/correct_grammar.png" width="36" style="vertical-align: middle;"/>
+  <strong>Dil Bilgisine Göre Düzelt ( F1 ) :</strong> Çevrilecek metindeki yanlışları o dilin kurallarına göre düzeltir.(Türkçe dil desteği yok.)
+</p>
+
+<p>
+  <img src="icon/correct_word.png" width="36" style="vertical-align: middle;"/>
+  <strong>Kelimeleri Düzelt ( F2 ) :</strong> Çevrilecek metindeki kelimeleri düzeltir.  (Desteklenen diller : English, Spanish, French, Italian, Portuguese, German, Russian, Arabic, Dutch, Persian.)
 </p>
 
 <p>
   <img src="icon/variant.png" width="36" style="vertical-align: middle;"/>
-  <strong>Dil Varyantlarını:</strong> Dil seçimi için o dilin farklı bölgelerdeki varyantlarını dahil eder.
+  <strong>Dil Varyantlarını:</strong> Dil seçimi için o dilin farklı bölgelerdeki varyantlarını dahil eder. (Kullanıcının dikkatini dağıttığı için gizlendi. Kodlardan aktif edilebilir.)
 </p>
 
 <p>
   <img src="icon/translation.png" width="36" style="vertical-align: middle;"/>
-  <strong>Çevir:</strong> Çeviri yapar. (ENTER tuşuyla da yapılabilir.)
+  <strong>Çevir (ENTER) :</strong> Çeviri yapar.
 </p>
 
 <p>
@@ -200,21 +207,24 @@ In other words:
 
 ## 🎯 Why PyTranslate?
 
-- ✅ No need to keep a website open in the background  
-- ✅ No complicated steps for image translation  
-- ✅ Everything is fast, simple, and accessible  
-- ✅ Helps without interrupting your workflow
+- ✅ No need to keep a website open in the background.  
+- ✅ No complicated steps for image translation.  
+- ✅ Everything is fast, simple, and accessible.  
+- ✅ Helps without interrupting your workflow.
 
-## 📄 How Does It Work?
+## 📄 How It Works
 
-- The main window of the application is in the form of a **toolbar**.  
-- It offers users options to **translate text** or **detect and translate text from images**.  
+- The application's main window is in the form of a **toolbar**.  
+- It offers users options to **translate text** or **detect and translate text from an image**.  
 - Programming language: **Python**  
 - Interface: **PyQt5**  
-- For OCR (text recognition from images): **pytesseract** and its language models  
-- For translation: **deep-translator** library  
-- For word correction: **language-tool-python** is used  
-- All related libraries and dependencies are listed in the `requirements.txt` file.
+- For filtering the image before OCR (Optical Character Recognition): the **open-cv** library,  
+- For OCR (detecting text from images): the **pytesseract** library and its language models,  
+- For translation operations: the **deep-translator** library,  
+- For grammar correction: the **language-tool-python** library,  
+- For spell correction: the **pyspellchecker** library is used.  
+- All project-related libraries and dependencies are listed in the `requirements.txt` file.
+
 
 ## 📦 Download
 
@@ -233,7 +243,7 @@ You can download the setup file from the link below to run independently on any 
 
 <p>
   <img src="icon/close.png" width="36" style="vertical-align: middle;"/>
-  <strong>Close:</strong> Closes the application.
+  <strong>Close ( ESC ):</strong> Closes the application.
 </p>
 
 <p>
@@ -257,20 +267,19 @@ You can download the setup file from the link below to run independently on any 
 </p>
 
 ---
-
 <p>
   <img src="icon/text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Text Translation:</strong> Opens the text translation window.
+  <strong>Text Translation ( Alt + 1 ) :</strong> Opens the Text Translation window.
 </p>
 
 <p>
   <img src="icon/image_text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Screen Translation:</strong> Detects text in the selected screen area and sends it for translation. (Detection depends on the selected language.)
+  <strong>Screen Translation ( Alt + 2 ) :</strong> Detects the text in the selected area on the screen and sends it to Text Translation. (Detection is based on the language selection located at the top center of the opened window.)
 </p>
 
 <p>
   <img src="icon/transparent.png" width="36" style="vertical-align: middle;"/>
-  <strong>Transparency:</strong> Sets the application to be partially transparent to show the background.
+  <strong>Make Transparent:</strong> Sets the app to be semi-transparent, allowing the background to show through.
 </p>
 
 <p>
@@ -280,49 +289,54 @@ You can download the setup file from the link below to run independently on any 
 
 <p>
   <img src="icon/rotation.png" width="36" style="vertical-align: middle;"/>
-  <strong>Rotate:</strong> Switches the application between horizontal and vertical modes.
+  <strong>Rotate:</strong> Switches between horizontal and vertical layouts of the application.
 </p>
 
 <p>
   <img src="icon/thema.png" width="36" style="vertical-align: middle;"/>
-  <strong>Theme:</strong> Changes the application design with dark and light color palettes.
+  <strong>Theme:</strong> Switches the application design between light and dark color palettes.
 </p>
 
 <p>
   <img src="icon/expand.png" width="36" style="vertical-align: middle;"/>
-  <strong>Collapse:</strong> Hides extra buttons to reduce the application's occupied space.
+  <strong>Minimize:</strong> Hides extra buttons to reduce the space the application occupies.
 </p>
 
 ---
 
 <p>
   <img src="icon/lang_change.png" width="36" style="vertical-align: middle;"/>
-  <strong>Swap Languages:</strong> Switches the source and target languages.
+  <strong>Swap Languages:</strong> Switches the positions of the source and target language selections.
 </p>
 
 <p>
   <img src="icon/text_change.png" width="36" style="vertical-align: middle;"/>
-  <strong>Swap Texts:</strong> Swaps the source and translated texts.
+  <strong>Swap Texts:</strong> Switches the source and translated texts.
 </p>
 
 <p>
-  <img src="icon/correct_text.png" width="36" style="vertical-align: middle;"/>
-  <strong>Word Correction:</strong> Corrects word mistakes in the text to be translated. (No Turkish language support.)
+  <img src="icon/correct_grammar.png" width="36" style="vertical-align: middle;"/>
+  <strong>Correct Grammar ( F1 ):</strong> Fixes errors in the source text according to grammar rules of that language. (Turkish is not supported.)
+</p>
+
+<p>
+  <img src="icon/correct_word.png" width="36" style="vertical-align: middle;"/>
+  <strong>Correct Words ( F2 ) :</strong> Corrects spelling mistakes in the source text. (Supported languages: English, Spanish, French, Italian, Portuguese, German, Russian, Arabic, Dutch, Persian.)
 </p>
 
 <p>
   <img src="icon/variant.png" width="36" style="vertical-align: middle;"/>
-  <strong>Language Variants:</strong> Includes different regional variants of the selected language.
+  <strong>Language Variants:</strong> Includes regional variants for language selection. (Hidden by default to reduce distraction. Can be enabled from the code.)
 </p>
 
 <p>
   <img src="icon/translation.png" width="36" style="vertical-align: middle;"/>
-  <strong>Translate:</strong> Performs the translation. (Can also be triggered with the ENTER key.)
+  <strong>Translate:</strong> Executes the translation. (Can also be triggered with the ENTER key.)
 </p>
 
 <p>
   <img src="icon/copy.png" width="36" style="vertical-align: middle;"/>
-  <strong>Copy:</strong> Copies the text from the associated field.
+  <strong>Copy:</strong> Copies the text in the associated field.
 </p>
 
 <p>
@@ -332,5 +346,5 @@ You can download the setup file from the link below to run independently on any 
 
 <p>
   <img src="icon/clear.png" width="36" style="vertical-align: middle;"/>
-  <strong>Clear:</strong> Clears the text in the associated field.
+  <strong>Clear:</strong> Deletes the text in the associated field.
 </p>

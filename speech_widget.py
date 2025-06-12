@@ -1,4 +1,5 @@
 import os
+import re
 
 from design import Ui_Form
 from languages_code import tool_and_translate_matching_variant, tool_and_translate_matching_base
@@ -7,10 +8,11 @@ from screen_scale import ScreenSize
 from exe_script_path_class import ExeScriptPath
 
 
-from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QCheckBox, QApplication, QListView
+from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QCheckBox, QApplication, QListView, QShortcut
 from PyQt5.QtCore import pyqtSignal, Qt, QSize, QEvent
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import QIcon, QPixmap, QFont, QKeySequence
 
+from spellchecker import SpellChecker
 from deep_translator import GoogleTranslator
 import language_tool_python
 import requests
@@ -37,6 +39,7 @@ class SpeechWidget(QWidget):
         self.install_icons()
         self.button_clicks()        #tüm pushbuttonları 'pushButton_' böyle başlat. 
         self.install_combobox_settings()
+        self.install_textedit_fontsize()
         self.combobox_source_text = self.ui.comboBox_source.currentText()
         self.combobox_target_text = self.ui.comboBox_target.currentText()
         self.layout_settings()
@@ -45,7 +48,7 @@ class SpeechWidget(QWidget):
         self.ui.textEdit_source.installEventFilter(self)    #textedit source için oraya odaklıyken ki tuş basımlarını yakalayıp sistemin kendi ctrl + v kombosunu ezip kendi yöntemimizi ekliyoruz.çünkü;
                                                             #bunu yapmazsak vscoddan yada internetten bişey kopyalanınca oranın stilini ve yazı tipini falan alıyor öyle kopyalıyor.font ayarlarıyla beraber kopyalıyor yani.html içerinin hepsini alıyor.
                                                             #bizde bunu istemediğimiz için event filtrelemeye gönderip sadece texti alıp bunu yapıştırmasını söyledik ve sistemin ctrl + v fonksiyonunu override ettik.      
-        
+        self.shortcut_widget()
 
     def install_icons(self):
         self.ui.pushButton_change_language.setIcon(QIcon(os.path.join(self.path_temp, 'icon','lang_change.png')))
@@ -55,7 +58,8 @@ class SpeechWidget(QWidget):
         self.ui.pushButton_move.setIcon(QIcon(os.path.join(self.path_temp, 'icon','move.png')))
         self.ui.pushButton_info.setIcon(QIcon(os.path.join(self.path_temp, 'icon','info.png')))
         self.ui.pushButton_change_text.setIcon(QIcon(os.path.join(self.path_temp, 'icon','text_change.png')))
-        self.ui.pushButton_correct_text.setIcon(QIcon(os.path.join(self.path_temp, 'icon','correct_text.png')))
+        self.ui.pushButton_correct_grammar.setIcon(QIcon(os.path.join(self.path_temp, 'icon','correct_grammar.png')))
+        self.ui.pushButton_correct_word.setIcon(QIcon(os.path.join(self.path_temp, 'icon','correct_word.png')))
         self.ui.pushButton_variant.setIcon(QIcon(os.path.join(self.path_temp, 'icon','variant.png')))
         self.ui.pushButton_translate.setIcon(QIcon(os.path.join(self.path_temp, 'icon','translation.png')))
         self.ui.pushButton_copy_s.setIcon(QIcon(os.path.join(self.path_temp, 'icon','copy.png')))
@@ -87,6 +91,8 @@ class SpeechWidget(QWidget):
         self.ui.pushButton_info.click()     #uygulama başlarken tooltipler açık olarak başlaması için bir kere tıklıyoruz bu butona.
         self.ui.pushButton_variant.setCheckable(True)
         self.ui.pushButton_maximize.setCheckable(True)
+        self.ui.pushButton_variant.hide()       #dillerin varyant seçimlerini kaldırdım ama daha sonra başka bi şekilde eklersem diye komple kodları silmek yerine butonu gizliyorum sadece.
+                                                #eğer varyantları açarsan onun sözlüğüne pyspellcheckerleri eklemeyi unutma.
 
     def install_combobox_settings(self):
         for combobox in [self.ui.comboBox_source, self.ui.comboBox_target]: 
@@ -123,7 +129,17 @@ class SpeechWidget(QWidget):
         else:
             self.combobox_target_text = text
 
-    
+    def install_textedit_fontsize(self):    #ekran ölçeklemeleri değişince fontlar bazılarında çok büyük bazılarında çok küçük gözüküyordu style sheet ile ayarladığımızda textedit için. bütün hepsinde aynı oranı korumak için burda kodda ayarlama yaptık.
+                                            #normalde aynı yazıyı büyük ekranda 10 satır yer kaplarken küçük ekranda 4 satır falan kaplıyordu ama bu şekilde yaparak aynı yazının aynı gui oranıyla yer kaplamasını sağladık. yani büyük ekrandada 5 satır küçük ekrandada 5 satır kaplıyor.
+        class SpecialFont(QFont):
+            def __init__(self, size):
+                super().__init__()
+                self.setPointSizeF(int(size))
+
+        SpecialFontSize = SpecialFont(8*self.screen_scale)
+        self.ui.textEdit_source.setFont(SpecialFontSize)        
+        self.ui.textEdit_target.setFont(SpecialFontSize)
+
     def layout_settings(self):
         m_s_r = int(6*self.screen_scale)   #m_s_r ---> margin_spacer_ratio anlamında kısalttım
         self.setContentsMargins(m_s_r, 0, m_s_r, 0)     #burası text editlerin ana pencere kenarlarında sıfır olarak durmasını engellemek için yazıldı. yani hafif bi kenarlıkmış gibi görünmesi için
@@ -171,14 +187,15 @@ class SpeechWidget(QWidget):
     def info_button_click(self):                #!!!!!!!buraya sonra açılır bi iletişim penceresi eklencek unutma
         if self.ui.pushButton_info.isChecked():
             self.ui.pushButton_change_language.setToolTip('Change Languages')
-            self.ui.pushButton_close.setToolTip('Close')
+            self.ui.pushButton_close.setToolTip('Close (ESC)')
             self.ui.pushButton_maximize.setToolTip('Maximize')
             self.ui.pushButton_minimize.setToolTip('Minimize')
             self.ui.pushButton_move.setToolTip('Move')
             self.ui.pushButton_info.setToolTip('Info')
             self.ui.pushButton_change_text.setToolTip('Change Texts')
-            self.ui.pushButton_correct_text.setToolTip('Correct Text')
-            self.ui.pushButton_translate.setToolTip('Translate')
+            self.ui.pushButton_correct_grammar.setToolTip('Correct Grammar (F1)')       #bu languagetool python ile yapılcak düzeltme. gramer düzelticek
+            self.ui.pushButton_correct_word.setToolTip('Correct Words (F2)')         #bu pyspecllchacker ile yapılcak düzeltme. sadece kelimeleri düzelticek
+            self.ui.pushButton_translate.setToolTip('Translate (ENTER)')
             self.ui.pushButton_copy_s.setToolTip('Copy')
             self.ui.pushButton_paste_s.setToolTip('Paste')
             self.ui.pushButton_clear_s.setToolTip('Clear')
@@ -202,7 +219,10 @@ class SpeechWidget(QWidget):
         self.ui.textEdit_source.setPlainText(target_textedit)
         self.ui.textEdit_target.setPlainText(source_textedit)
     
-    def correct_text_button_click(self):
+    def correct_grammar_button_click(self):
+        '''self.ui.pushButton_correct_word.click()     #gramer düzeltici  kelimeleri pek düzeltemiyor onun için önce kelime düzeltmeye bir kez tıklatıp düzgün kelimeleri veriyoruz.'''     #normalde böyle yapcaktım ama spellcheckerde desteklenen dil sayısı çok az olduğu için 
+                                                                                                                                                                                            #her grammer düzeltmede eğer spellcheckerde ki desteklenen dillet yoksa uyarı veriyodu. 
+                                                                                                                                                                                            #o yüzden bunu kaldırdım. sanki languagenin desteklenen dilleri onlarmış gibi gözüküyodu.
         #tool_and_translate_matching['Slovenian (Generic)']['language_tool']
         #tool_and_translate_matching['Slovenian (Generic)']['deep_translator']
         tool = None     #local değişlende bunu burda tanımlamazsak eğer tryda hata verirse finally bloğunda toolu görmüyor ve hata veriyor. o yüzden burda none ile tanımlayıp finalliyde ona göre işlem yapıyoruz.
@@ -223,6 +243,41 @@ class SpeechWidget(QWidget):
             finally:
                 if tool is not None:
                     tool.close()   #kaynak güvenilği açısından en temizi her düzeltme sonrası bağlantıyı kapatmak olduğu için her buton tıklaması sonrası kapatıyoz bunu. hem ratelimitede daha geç dolduruyor böylece.
+
+    def correct_word_button_click(self):
+        language = self.combobox_dict[self.combobox_source_text]['spellchecker']
+        if language is None:
+            self.main_window.msg_box.edit('The selected language for the source translation text is not supported for spell checking. Supported languages are: English, Spanish, French, Italian, Portuguese, German, Russian, Arabic, Dutch, Persian.')
+            return
+        spell = SpellChecker(language = language)
+        tokens = re.findall(r"\w+|[^\w\s]", self.ui.textEdit_source.toPlainText(), re.UNICODE)      #normalde noktalama işaretleri kelimeleri bölerken onlarla birmiş  gibi ayırıyordu split yöntemi parçalara. ama bu satırla noktalama işaretleri ayrıymış gibi bölüyor böylece kaybolmuyor işaretler. kelimelerle birleştirmemiş oluyor.
+        corrected_tokens = []
+
+        for token in tokens:
+            if token.isalpha():
+                is_capitalized = token[0].isupper()     #eğer textin ilk harfi büyükse onu koruması için 
+                correction = spell.correction(token.lower())
+
+                if correction:
+                    if is_capitalized:                  #burda bu kontrol yapılıp büyükse yine büyük harfe dönüştürülüyor baş harf için
+                        correction = correction.capitalize()
+                    corrected_tokens.append(correction)
+                else:
+                    corrected_tokens.append(token)
+            else:
+                corrected_tokens.append(token)  #noktalama işaretlerini direkt ekliyoruz
+
+        #corrected_text = ' '.join(corrected_tokens)    #böyle yapınca noktalama işaretlerinin önüne boşluk koyuyor. o yüzden aşağıdaki şekle çevirelerek gereksiz fazla boşluklardan arındırılıyor.
+        corrected_text = ""
+        for i, token in enumerate(corrected_tokens):
+            if i > 0 and token not in ".,!?;:'":     #eğer kelime başı ve noktalama işaretleriyle bitmiyosa boşluk ekliyor kelimeler arasında.
+                corrected_text += " "
+            corrected_text += token
+        
+        
+
+        self.ui.textEdit_source.setPlainText(corrected_text)
+
 
     def variant_button_click(self):        
         self.install_combobox_items()
@@ -273,8 +328,16 @@ class SpeechWidget(QWidget):
             if event.key() == Qt.Key.Key_Enter or event.key() == Qt.Key.Key_Return:
                 self.ui.pushButton_translate.click()
                 #return True        #bunu kaldırmamızın sebebi entere basınca çevirdikten sonra yine kendi hazır olan yazma yeri için aşağı satıra inmesi gerçekleşsin diye. bunu koyarsak kendi hazır olan fonksiyonunu yapmıyor sadece bizim eklediğimizi yapıyor. aşağı satıra inmiyor.
+        #yukardaki texteditte entere tanımladığımız kısayolu genel uygulama düzeyince shortcut ile tanımladığımız için burası yorum yapılıp oraya konuldu. genel widget kısayollarını ordan yönetmek için.
+        #!!! enteri text editteyken genel kısayol tanımlama ile tanımlayınca çalışmıyor o yüzden eventfiltere geri alındı enter tuşu.
         return super().eventFilter(obj, event)  # Diğer her şeyi normal devam etsin
 
+    def shortcut_widget(self):
+        '''QShortcut(QKeySequence('Esc'), self).activated.connect(self.ui.pushButton_close.click())'''        #bu şekilde yaparsak direk fonksiyon çalıştığı için hata veriyor o yüzden parantezleri koymuyoruz direk çalışmasın diye
+        '''QShortcut(QKeySequence('Enter'), self).activated.connect(self.ui.pushButton_translate.click)   #bu enter burda çalışmadığı için event filterde tanımlandı.'''
+        QShortcut(QKeySequence('Esc'), self).activated.connect(self.ui.pushButton_close.click)
+        QShortcut(QKeySequence('F1'), self).activated.connect(self.ui.pushButton_correct_grammar.click)
+        QShortcut(QKeySequence('F2'), self).activated.connect(self.ui.pushButton_correct_word.click)
 
     def closeEvent(self,event):
         self.close_signal.emit()

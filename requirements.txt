@@ -1,12 +1,13 @@
-deep_translator==1.11.4
-language_tool_python==2.9.3
-Pillow==11.2.1
-PyAutoGUI==0.9.54
-PyQt5==5.15.11
-PyQt5_sip==12.17.0
+deep-translator==1.11.4
+importlib-metadata==8.0.0
+language-tool-python==2.9.3
+opencv-python==4.11.0.86
+pyautogui==0.9.54
+pyinstaller==6.14.1
+pyqt5==5.15.11
+pyspellchecker==0.8.3
 pytesseract==0.3.13
 Requests==2.32.3
-pyinstaller
 
 
 

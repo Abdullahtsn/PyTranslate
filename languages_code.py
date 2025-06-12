@@ -1,4 +1,6 @@
 
+
+#!!!bu  kaldırıldı hem buton fazlalığı hemde kullanım zorluğu çıkartıyor gibi geldi.
 tool_and_translate_matching_variant = {
     'Auto': {'language_tool':'auto', 'deep_translator': 'auto'},
     'Arabic (Generic)': {'language_tool':'ar', 'deep_translator': 'ar'},
@@ -76,42 +78,44 @@ tool_and_translate_matching_variant = {
 
 
 tool_and_translate_matching_base = {
-    'Auto': {'language_tool':'auto', 'deep_translator': 'auto'},
-    'Arabic': {'language_tool':'ar', 'deep_translator': 'ar'},
-    'Belarusian': {'language_tool':'be', 'deep_translator': 'be'},
-    'Brazilian Portuguese': {'language_tool':'pt', 'deep_translator': 'pt'},
-    'Catalan': {'language_tool':'ca', 'deep_translator': 'ca'},
-    'Chinese (Tc)': {'language_tool':'zh', 'deep_translator': 'zh-TW'},
-    'Chinese (Sc)': {'language_tool':'zh-CN', 'deep_translator': 'zh-CN'},
-    'Danish': {'language_tool':'da', 'deep_translator': 'da'},
-    'Dutch': {'language_tool':'nl', 'deep_translator': 'nl'},
-    'English': {'language_tool':'en', 'deep_translator': 'en'},
-    'Esperanto': {'language_tool':'eo', 'deep_translator': 'eo'},
-    'Filipino': {'language_tool':'tl', 'deep_translator': 'tl'},
-    'French': {'language_tool':'fr', 'deep_translator': 'fr'},
-    'Galician': {'language_tool':'gl', 'deep_translator': 'gl'},
-    'German': {'language_tool':'de', 'deep_translator': 'de'},
-    'Irish': {'language_tool':'ga', 'deep_translator': 'ga'},
-    'Italian': {'language_tool':'it', 'deep_translator': 'it'},
-    'Japanese': {'language_tool':'ja', 'deep_translator': 'ja'},
-    'Norwegian': {'language_tool':'no', 'deep_translator': 'no'},
-    'Persian': {'language_tool':'fa', 'deep_translator': 'fa'},
-    'Polish': {'language_tool':'pl', 'deep_translator': 'pl'},
-    'Portuguese': {'language_tool':'pt', 'deep_translator': 'pt'},
-    'Romanian': {'language_tool':'ro', 'deep_translator': 'ro'},
-    'Russian': {'language_tool':'ru', 'deep_translator': 'ru'},
-    'Slovak': {'language_tool':'sk', 'deep_translator': 'sk'},
-    'Slovenian': {'language_tool':'sl', 'deep_translator': 'sl'},
-    'Spanish': {'language_tool':'es', 'deep_translator': 'es'},
-    'Swedish': {'language_tool':'sv', 'deep_translator': 'sv'},
-    'Turkish': {'language_tool':None, 'deep_translator': 'tr'},
-    'Ukrainian': {'language_tool':'uk', 'deep_translator': 'uk'},
+    'Auto': {'language_tool':'auto', 'deep_translator': 'auto', 'spellchecker': None},
+    'Turkish': {'language_tool':None, 'deep_translator': 'tr', 'spellchecker': None},
+    'English': {'language_tool':'en', 'deep_translator': 'en', 'spellchecker': 'en'},
+    'Arabic': {'language_tool':'ar', 'deep_translator': 'ar', 'spellchecker': 'ar'},
+    'Belarusian': {'language_tool':'be', 'deep_translator': 'be', 'spellchecker': None},
+    'Catalan': {'language_tool':'ca', 'deep_translator': 'ca', 'spellchecker': None},
+    'Chinese (Tc)': {'language_tool':'zh', 'deep_translator': 'zh-TW', 'spellchecker': None},
+    'Chinese (Sc)': {'language_tool':'zh-CN', 'deep_translator': 'zh-CN', 'spellchecker': None},
+    'Danish': {'language_tool':'da', 'deep_translator': 'da', 'spellchecker': None},
+    'Dutch': {'language_tool':'nl', 'deep_translator': 'nl', 'spellchecker': 'nl'},
+    'Esperanto': {'language_tool':'eo', 'deep_translator': 'eo', 'spellchecker': None},
+    'Filipino': {'language_tool':'tl', 'deep_translator': 'tl', 'spellchecker': None},
+    'French': {'language_tool':'fr', 'deep_translator': 'fr', 'spellchecker': 'fr'},
+    'Galician': {'language_tool':'gl', 'deep_translator': 'gl', 'spellchecker': None},
+    'German': {'language_tool':'de', 'deep_translator': 'de', 'spellchecker': 'de'},
+    'Irish': {'language_tool':'ga', 'deep_translator': 'ga', 'spellchecker': None},
+    'Italian': {'language_tool':'it', 'deep_translator': 'it', 'spellchecker': 'it'},
+    'Japanese': {'language_tool':'ja', 'deep_translator': 'ja', 'spellchecker': None},
+    'Norwegian': {'language_tool':'no', 'deep_translator': 'no', 'spellchecker': None},
+    'Persian': {'language_tool':'fa', 'deep_translator': 'fa', 'spellchecker': 'fa'},
+    'Polish': {'language_tool':'pl', 'deep_translator': 'pl', 'spellchecker': None},
+    'Portuguese': {'language_tool':'pt', 'deep_translator': 'pt', 'spellchecker': 'pt'},
+    'Romanian': {'language_tool':'ro', 'deep_translator': 'ro', 'spellchecker': None},
+    'Russian': {'language_tool':'ru', 'deep_translator': 'ru', 'spellchecker': 'ru'},
+    'Slovak': {'language_tool':'sk', 'deep_translator': 'sk', 'spellchecker': None},
+    'Slovenian': {'language_tool':'sl', 'deep_translator': 'sl', 'spellchecker': None},
+    'Spanish': {'language_tool':'es', 'deep_translator': 'es', 'spellchecker': 'es'},
+    'Swedish': {'language_tool':'sv', 'deep_translator': 'sv', 'spellchecker': None},
+    'Ukrainian': {'language_tool':'uk', 'deep_translator': 'uk', 'spellchecker': None}
 }
 
+
 tesseract_dict = {
+    "English": "eng",
+    "Turkish": "tur",
+    "Turkish + English": "tur+eng",
     "Arabic": "ara",
     "Belarusian": "bel",
-    "Portuguese": "por",
     "Catalan": "cat",
     "Chinese (Tc)": "chi_tra",
     "Chinese (Tc) - Vertical": "chi_tra_vert",
@@ -119,7 +123,6 @@ tesseract_dict = {
     "Chinese (Sc) - Vertical": "chi_sim_vert",
     "Danish": "dan",
     "Dutch": "nld",
-    "English": "eng",
     "Esperanto": "epo",
     "Filipino": "tgl",  
     "French": "fra",
@@ -138,9 +141,10 @@ tesseract_dict = {
     "Slovenian": "slv",
     "Spanish": "spa",
     "Swedish": "swe",
-    "Turkish": "tur",
-    "Ukrainian": "ukr",
+    "Ukrainian": "ukr"
 }
+
+
 
 
 
@@ -173,8 +177,21 @@ print(langcode_for_tesseract)
 
 
 
-
-
+#print(SpellChecker().languages())   #desteklenen diller
+'''spellchecker_dict = {
+    "English": "en",
+    "Spanish": "es",
+    "French": "fr",
+    "Italian": "it",
+    "Portuguese": "pt",
+    "German": "de",
+    "Russian": "ru",
+    "Arabic": "ar",
+    "Latvian": "lv",
+    "Basque": "eu",
+    "Dutch": "nl",
+    "Persian": "fa"
+}'''
 
 
 
