@@ -93,12 +93,12 @@ class Thema:
                             QPushButton, QToolButton {{
                         background-color: {self.button_bg} ; 
                         text-align: center; 
-                        padding: {2*screen_scale}px; 
+                        padding: {1*screen_scale}px; 
                         margin: 0px; 
                         spacing: 0px; 
-                        border-radius:{4*screen_scale}px;
+                        border-radius:{2*screen_scale}px;
                         border-style: solid;
-                        border-width: {2*screen_scale}px;
+                        border-width: {1*screen_scale}px;
                         border-color: {self.button_border};
                         color: {self.button_color};
                         }}
@@ -132,13 +132,13 @@ class Thema:
                                             açılır menüsü qlistviewe dönüşüyor galiba yani stil tanımlamalarına qlistviewide eklemememiz gerekiyor*/
                         background-color: {self.combobox_bg};          
                         color: {self.combobox_color}; 
-                        border: {1*screen_scale}px ridge {self.combobox_border};
-                        border-radius: {2*screen_scale}px;
-                        padding: {4*screen_scale}px;
-                        padding-left: {8*screen_scale}px;
-                        padding-right: {20*screen_scale}px; /*bunu koymamın sebebi uzun itemlerin textleri buton resmiyle altlı üstlü oluyor. o yüzden buton  resmi için yer açıyoruz*/
-                        margin: {2*screen_scale}px;
-                        font: bold {8*screen_scale}px;
+                        border: {0.5*screen_scale}px ridge {self.combobox_border};
+                        border-radius: {1*screen_scale}px;
+                        padding: {2*screen_scale}px;
+                        padding-left: {4*screen_scale}px;
+                        padding-right: {10*screen_scale}px; /*bunu koymamın sebebi uzun itemlerin textleri buton resmiyle altlı üstlü oluyor. o yüzden buton  resmi için yer açıyoruz*/
+                        margin: {1*screen_scale}px;
+                        font: bold {4*screen_scale}px;
                         outline: none;
                         }}
                             QComboBox::hover {{
@@ -147,20 +147,20 @@ class Thema:
                         border-color: {self.combobox_hover_border}; 
                         }}
                             QComboBox QAbstractItemView {{              /* comboboxa tıklanıldıktan sonra açılan listenin tasarımı */
-                        border: {2*screen_scale}px dashed {self.combobox_abstract_border};     /*açılır menü dış kenarlık*/
-                        border-radius: {2*screen_scale}px;
+                        border: {1*screen_scale}px dashed {self.combobox_abstract_border};     /*açılır menü dış kenarlık*/
+                        border-radius: {1*screen_scale}px;
                         background-color: {self.combobox_abstract_bg};                               /*açılır menü iç renk*/
-                        padding: {4*screen_scale}px;
+                        padding: {2*screen_scale}px;
                         margin: 0px;
-                        font: bold {8*screen_scale}px;
+                        font: bold {4*screen_scale}px;
                         outline: none;                /*açılan listede fare itemin üzerine gelince küçük gri noktalar yada border gibi şeyler çiziyordu.outline none yaparak bundan kurtulduk.*/
                         }}
                             QComboBox QAbstractItemView::item {{        /*burası combobox açıldıktan sonra ki o listedeki itemleri kontrol ediyor padding margin burda uygulanınca oluyor. ama font burda uyarlanmıyor.*/
                         background-color: {self.combobox_abstractitem_bg};          
                         color: {self.combobox_abstractitem_color}; 
-                        padding: {6*screen_scale}px;
-                        margin: {2*screen_scale}px;
-                        border-radius: {2*screen_scale}px;
+                        padding: {3*screen_scale}px;
+                        margin: {1*screen_scale}px;
+                        border-radius: {1*screen_scale}px;
                         selection-color: {self.combobox_item_hover_color};
                         outline: none;
                         }}
@@ -170,7 +170,7 @@ class Thema:
                             QComboBox::drop-down {{
                         width: 0px;
                         border: none;
-                        border-radius: {6*screen_scale}px;
+                        border-radius: {3*screen_scale}px;
                         outline: none;
                         }}
                             QComboBox:!editable {{ 
@@ -178,9 +178,9 @@ class Thema:
                             QComboBox:editable {{   
                         }}
                             QComboBox::down-arrow {{         /* ok kısmının olduğu yer */
-                        width: {14*screen_scale}px;
-                        height: {14*screen_scale}px;
-                        padding-right: {20*screen_scale}px;
+                        width: {7*screen_scale}px;
+                        height: {7*screen_scale}px;
+                        padding-right: {10*screen_scale}px;
                         image: url(icon/down.png); 
                         }}      
                             QMessageBox {{
@@ -190,14 +190,14 @@ class Thema:
                         margin: 0px;   
                         }}
                             QMessageBox QLabel {{
-                        font: bold {8*screen_scale}px;
+                        font: bold {4*screen_scale}px;
                         background-color: {self.messagebox_label_bg}; 
                         color: {self.messagebox_label_color};
                         padding: 0px;
                         margin:0px;
                         }}
                             QMessageBox QPushButton {{          /*buton için varsayılan ayarları kullandık sadece yazıyla oynadık, eğer özelleştirmek istersen aşağıdaki düzenle*/
-                        font: bold {8*screen_scale}px;
+                        font: bold {4*screen_scale}px;
                         color: {self.messagebox_button_color}; 
                         background-color: {self.messagebox_button_bg}; 
                         }}
@@ -210,12 +210,12 @@ class Thema:
                         color: {self.textedit_color}; 
                         selection-background-color: {self.textedit_selectbg};       /* fareyle seçtiğimiz yazının arka planı */
                         selection-color: {self.textedit_selectcolor};
-                        border: {2*screen_scale}px solid {self.textedit_border};
-                        padding: {6*screen_scale}px;
+                        border: {1*screen_scale}px solid {self.textedit_border};
+                        padding: {3*screen_scale}px;
                         }}
                             QCheckBox::indicator {{
-                        width: {20*screen_scale}px;
-                        height: {20*screen_scale}px; 
+                        width: {10*screen_scale}px;
+                        height: {10*screen_scale}px; 
                         image: url(/icon/unchecked.png);    /*checkboxa resim ekleme. o tik işareti yerine kendi resmimizi koyabiliyoruz.*/
                         background-color: {self.checkbox_indicator_bg};
                         border: none;
@@ -230,14 +230,14 @@ class Thema:
 
                             QScrollBar:vertical, QScrollBar:horizontal  {{
                         background-color: {self.scrollbar_vrt_hrz_bg};
-                        width: {6*screen_scale}px;
-                        border-radius: {2*screen_scale}px;
+                        width: {3*screen_scale}px;
+                        border-radius: {1*screen_scale}px;
                         margin: 0px;
                         }}
                             QScrollBar::handle:vertical, QScrollBar::handle:horizontal{{
                         background-color: {self.scrollbar_handle_bg};
-                        min-height: {10*screen_scale}px;
-                        border-radius: {2*screen_scale}px;
+                        min-height: {5*screen_scale}px;
+                        border-radius: {1*screen_scale}px;
                         }}
                             QScrollBar::handle:vertical:pressed, QScrollBar::handle:horizontal:pressed {{  /* scrollbar tutma yeri için hover olayıda var lazım olursa kullan */
                         background-color: {self.scrollbar_pressed_bg};
@@ -256,11 +256,11 @@ class Thema:
                         background-color: {self.menu_bg};
                         color: {self.menu_color};
                         border: {self.menu_border};
-                        margin: {2*screen_scale}px; 
+                        margin: {1*screen_scale}px; 
                         }}
 
                             QMenu::item {{
-                        padding: {4*screen_scale};
+                        padding: {2*screen_scale};
                         border: 0px solid {self.menu_item_border}; 
                         background-color: {self.menu_item_bg};
                         color: {self.menu_item_color};
@@ -273,8 +273,8 @@ class Thema:
                         }}
 
                             QMenu::indicator {{
-                        width: {8*screen_scale};
-                        height: {8*screen_scale};
+                        width: {4*screen_scale};
+                        height: {4*screen_scale};
                         }}
                                                 ''')   
         return style_sheet_string       #setstylesheet fonksiyonuna direk burdaki fonksiyonu verince renkleri değiştirip bu stringi geri gönderip uygulaması için return yapıyoz.
@@ -292,12 +292,12 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#2b241e',
     'button_color' : '#e8e6e3',
     'button_border' : '#3c342c',
-    'button_checked_bg' : '#4e3f33',
+    'button_checked_bg' : "#234414",
     'button_checked_color' : '#f5f4f2',
-    'button_checked_border' : '#5b4a3c',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#362f29',
     'button_hover_color' : '#f0eeec',
-    'button_hover_border' : '#4a4036',
+    'button_hover_border' : '#7a9980',
     'button_pressed_bg' : '#3a2e25',
     'button_pressed_color' : '#ffffff',
     'button_pressed_border' : '#5e4b3c',
@@ -347,12 +347,12 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg': '#21262d',
     'button_color': '#c9d1d9',
     'button_border': '#30363d',
-    'button_checked_bg': '#238636',
-    'button_checked_color': '#ffffff',
-    'button_checked_border': '#2ea043',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg': '#30363d',
     'button_hover_color': '#f0f6fc',
-    'button_hover_border': '#484f58',
+    'button_hover_border': '#7a9980',
     'button_pressed_bg': '#1f6feb',
     'button_pressed_color': '#ffffff',
     'button_pressed_border': '#388bfd',
@@ -401,13 +401,13 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'form_bg' : '#3a3349',
     'button_bg' : '#2a2240',
     'button_color' : '#dcd6f7',
-    'button_border' : '#3d3660',
-    'button_checked_bg' : '#42365c',
-    'button_checked_color' : '#e2ddf9',
-    'button_checked_border' : '#51487a',
+    'button_border' : "#c1b4f8",
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#3a3152',
     'button_hover_color' : '#e6e1fa',
-    'button_hover_border' : '#5a4b8a',
+    'button_hover_border' : '#e6e1fa',
     'button_pressed_bg' : '#231a3b',
     'button_pressed_color' : '#e8e5fc',
     'button_pressed_border' : '#4c3f73',
@@ -433,7 +433,7 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'textedit_color' : '#dad6fa',
     'textedit_selectbg' : '#534b7a',
     'textedit_selectcolor' : '#fff',
-    'textedit_border' : '#4d4469',
+    'textedit_border' : "#aeabb6",
     'checkbox_indicator_bg' : 'transparent',
     'scrollbar_vrt_hrz_bg' : '#3a3349',
     'scrollbar_handle_bg' : '#534b7a',
@@ -452,18 +452,18 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
 'Sunset Isle':{
     'mainwindow_bg': 'transparent',
     'toolbar_bg': 'transparent',
-    'i_widget_bg': '#1b0f1a',  # koyu morumsu zemin
-    'form_bg': '#2a1729',      # mor-pembe geçişli
-    'button_bg': '#4a2238',    # koyu şarap tonu
-    'button_color': '#ffeedd', # sıcak açık krem
+    'i_widget_bg': '#1b0f1a',  
+    'form_bg': '#2a1729',      
+    'button_bg': '#4a2238',    
+    'button_color': '#ffeedd', 
     'button_border': '#5e2c45',
-    'button_checked_bg': "#4e2b19",  # canlı turuncu
-    'button_checked_color': '#ffffff',
-    'button_checked_border': '#f1843f',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg': '#5e2c45',
     'button_hover_color': '#fff8f0',
     'button_hover_border': '#86445f',
-    'button_pressed_bg': '#cf3b57',  # pembe-kırmızı karışımı
+    'button_pressed_bg': '#cf3b57',  
     'button_pressed_color': '#ffffff',
     'button_pressed_border': '#e95a70',
     'combobox_bg': '#2a1729',
@@ -512,9 +512,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#1a2338',
     'button_color' : '#d0d8e8',
     'button_border' : '#2c354b',
-    'button_checked_bg' : '#2f4a7d',
-    'button_checked_color' : '#ffffff',
-    'button_checked_border' : '#3b5a99',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#26324d',
     'button_hover_color' : '#e8f0ff',
     'button_hover_border' : '#3a4663',
@@ -567,9 +567,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#1a3528',
     'button_color' : '#d8ede0',
     'button_border' : '#274b38',
-    'button_checked_bg' : '#2e5e45',
-    'button_checked_color' : '#ffffff',
-    'button_checked_border' : '#397955',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#234a35',
     'button_hover_color' : '#e8fff3',
     'button_hover_border' : '#32634a',
@@ -622,9 +622,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#2d3e50',
     'button_color' : '#f5f7f9',
     'button_border' : '#3a4f66',
-    'button_checked_bg' : '#3c5973',
-    'button_checked_color' : '#ffffff',
-    'button_checked_border' : '#4d6c89',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#435d77',
     'button_hover_color' : '#ffffff',
     'button_hover_border' : '#57738e',
@@ -674,25 +674,25 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'toolbar_bg': 'transparent',
     'i_widget_bg': '#e6f0f2',
     'form_bg': '#d0e1e7',
-    'button_bg': '#4b5d55',    # daha koyu yeşil-gri
-    'button_color': '#ffffff', # açık ikon/metin
+    'button_bg': '#4b5d55',    
+    'button_color': '#ffffff', 
     'button_border': '#3c4d46',
-    'button_checked_bg': '#2f463f',  # bastırılmış koyu orman
-    'button_checked_color': '#ffffff',
-    'button_checked_border': '#405f54',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg': '#5d7268',
     'button_hover_color': '#ffffff',
     'button_hover_border': '#4a5f56',
     'button_pressed_bg': '#223730',
     'button_pressed_color': '#ffffff',
     'button_pressed_border': '#304d43',
-    'combobox_bg': '#4b5d55',           # koyu combobox zemin
+    'combobox_bg': '#4b5d55',         
     'combobox_color': '#ffffff',
     'combobox_border': '#3c4d46',
     'combobox_hover_bg': '#5d7268',
     'combobox_hover_color': '#ffffff',
     'combobox_hover_border': '#4a5f56',
-    'combobox_abstract_bg': '#e6f0f2',  # açılan paneli koruduk
+    'combobox_abstract_bg': '#e6f0f2',  
     'combobox_abstract_border': '#91b3a1',
     'combobox_abstractitem_bg': '#a9c5b5',
     'combobox_abstractitem_color': '#1c2b27',
@@ -732,9 +732,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : "#351104",
     'button_color' : '#fef9f5',
     'button_border' : '#8b3a1d',
-    'button_checked_bg' : "#4E230F",
-    'button_checked_color' : '#ffffff',
-    'button_checked_border' : "#94340e",
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#8c3a1d',
     'button_hover_color' : '#ffffff',
     'button_hover_border' : '#ae5028',
@@ -842,9 +842,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#1a1a1a',
     'button_color' : '#fcefa1',
     'button_border' : '#2c2c2c',
-    'button_checked_bg' : "#333131",
-    'button_checked_color' : '#fff8b0',
-    'button_checked_border' : '#3d3d3d',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#2e2e2e',
     'button_hover_color' : '#fff9c4',
     'button_hover_border' : '#4a4a4a',
@@ -897,9 +897,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#1d1d1d',
     'button_color' : '#e6e6e6',
     'button_border' : '#333333',
-    'button_checked_bg' : '#292929',
-    'button_checked_color' : '#f0f0f0',
-    'button_checked_border' : '#444444',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#2e2e2e',
     'button_hover_color' : '#fafafa',
     'button_hover_border' : '#555555',
@@ -952,9 +952,9 @@ ThemaDict = {                  #thema menüsündeki seçeneklerle birebir uyumlu
     'button_bg' : '#322a4f',
     'button_color' : '#e8e5fc',
     'button_border' : '#5a4b8a',
-    'button_checked_bg' : '#5a4b8a',
-    'button_checked_color' : '#f0eeff',
-    'button_checked_border' : '#665d8e',
+    'button_checked_bg' : "#234414",
+    'button_checked_color' : '#f5f4f2',
+    'button_checked_border' : "#7a9980",
     'button_hover_bg' : '#665d8e',
     'button_hover_color' : '#f4f2ff',
     'button_hover_border' : '#7a74a7',

@@ -7,7 +7,8 @@ class ScreenSize:               #genel özet ; sadece bir kere hesaplanıcak de�
                                 #sonrakiler bu ilk ölçümü kullanıcak. bu yönteme singleton deniyor. bişeyi sınıf düzeyinde tanımlayıp hep onu kullanıyoruz ve sadece bir kere tanımlama yapılıyor. diğer classlarda bu ilk tanımlanıp kaydedileni kullanıyor.
     def __new__(cls):           #bu new methodu classların sabit fonksiyonlarından biri pythonda. bu cls kısmı new fonksiyonuna özel. def initteki self gibi düşün.
                                 #def init gibi. ama initten bile önce çalışıyor. def init fonksiyonu eğer bu new fonksiyonu başarılı olursa çalışır.
-        if cls._instance is None:
+        
+        '''if cls._instance is None:
             cls._instance = super(ScreenSize, cls).__new__(cls)          #Bu, Singleton deseninde sadece bir tane nesne yaratılmasını garanti eder. Eğer _instance zaten oluşturulmuşsa, tekrar bir nesne yaratılmayacak. eğer mantığını unutursan initteki super gibi. self yerlerine cls, init yerlerine new yazılıyor.
             
             w, h = pyautogui.size()         #genişlik, yükseklik
@@ -28,6 +29,34 @@ class ScreenSize:               #genel özet ; sadece bir kere hesaplanıcak de�
                 cls._instance.scale = 6
             else:
                 cls._instance.scale = 1
+                
+        return cls._instance'''
+
+        #yukarısı ilk ölçeklemeydi ama çok kısıtlı kaldı biraz daha genişlettim o yüzden .
+
+        if cls._instance is None:
+            cls._instance = super(ScreenSize, cls).__new__(cls)          #Bu, Singleton deseninde sadece bir tane nesne yaratılmasını garanti eder. Eğer _instance zaten oluşturulmuşsa, tekrar bir nesne yaratılmayacak. eğer mantığını unutursan initteki super gibi. self yerlerine cls, init yerlerine new yazılıyor.
+            
+            w, h = pyautogui.size()         #genişlik, yükseklik
+            cls._instance.width = w
+            cls._instance.height = h
+            
+            if (w,h) in [(800, 600), (1024, 768), (1128, 634), (1152, 864)]:
+                cls._instance.scale = 2
+            elif (w,h) in [(1280, 720), (1280, 960), (1280, 1024), (1366, 768), (1440,900), (1600, 900)]:
+                cls._instance.scale = 2.5
+            elif (w,h) in [(1600, 1200), (1680, 1050), (1760, 990), (1920, 1080), (1920, 1200)]:
+                cls._instance.scale = 3
+            elif (w, h) in [(2560, 1440), (2560, 1600), (3440, 1440)]:
+                cls._instance.scale = 4
+            elif (w, h) == (3840, 2160):
+                cls._instance.scale = 6
+            elif (w, h) == (5120, 2880):
+                cls._instance.scale = 8
+            elif (w, h) == (7680, 4320):
+                cls._instance.scale = 12
+            else:
+                cls._instance.scale = 1.5
                 
         return cls._instance
     

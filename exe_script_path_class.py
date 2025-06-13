@@ -18,6 +18,7 @@ class ExeScriptPath:
                 cls._instance.path_exe = os.path.dirname(os.path.abspath(__file__))
         return cls._instance
     
+    #eğer onefile ile paketlemiyosan pathtempi ver yola. one file paketleyip exenin yanında olacaksa dosya o zaman pathexeyi ver.
     
     def paths(self):   #bu sınıfı oluşturcağımız yerde direk bunu çağırıyoruz. değerleri döndürüyor. oluşturduğumuz yerde hepsini tek tek vermekle uğraşmıyoruz.
         return self.path_temp, self.path_exe

@@ -50,9 +50,9 @@ class ImageWidget(QWidget):
         #self.setWindowOpacity(0.85)
         self.setContentsMargins(0,0,0,0)
         self.rubber_band = SRubberBand(QRubberBand.Shape.Rectangle, self)
-        pixmap = QPixmap(os.path.join(self.path_temp, 'icon','cursor.png')).scaled(int(30*self.screen_scale),int(30*self.screen_scale), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        pixmap = QPixmap(os.path.join(self.path_temp, 'icon','cursor.png')).scaled(int(14*self.screen_scale),int(14*self.screen_scale), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         pixmap_hot_x = round(pixmap.width()/2)
-        pixmap_hot_y = round((pixmap.height()/2) - int(8*self.screen_scale))
+        pixmap_hot_y = round((pixmap.height()/2) - int(4*self.screen_scale))
         self.special_cursor = QCursor(pixmap, hotX = pixmap_hot_x, hotY = pixmap_hot_y)     #burdaki hotx ve hoty farenin ana tıklama noktasını belirtiyor piksel olarak. resmin hangi bölgesinin tıklama noktası olacağı kısaca.
                                                                                             #eğer hotx ve hotyyi vermezsek sol üst köşeyi tıklama noktası alıyor verdiğimiz resimin yani (0,0). bizim fare işaretçimizin okunun ucu sol üstten değil ortadan başladığı için o konumu ona veriyoruz.
         #self.setCursor(Qt.CursorShape.CrossCursor)      #kırpma işaretine çevirme
@@ -72,7 +72,7 @@ class ImageWidget(QWidget):
         view = QListView() 
         view.setCursor(self.special_cursor)     #normalde bu widgetin hepsine uyguluyor cursoru ama listviewi burda oluşturduğumuz için comboboxu açınca burda fare normal varsayılanına dönüyordu listedeyken. o yüzden buna da ayrıca uyguluyoruz.
         view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)    #comboboxun içine scrollbar eklemek için. (comboboxa eklenen itemler fazla olunca scrolbar yerine aşağıda ve yukarda buton çıkıyor.)
-        view.setViewportMargins(0,0,int(4*self.screen_scale),0) 
+        view.setViewportMargins(0,0,int(2*self.screen_scale),0) 
         self.combobox = QComboBox(self)
         self.combobox.setMaxVisibleItems(10)  #self.comboboxda aynı anda gösterilcek item sayısı sınırlama
         self.combobox.setView(view)
@@ -184,7 +184,7 @@ class ImageWidget(QWidget):
     
     def showEvent(self, event):
         super().showEvent(event)
-        self.combobox.move(int(round(self.screen_w/2)-(self.combobox.sizeHint().width()/2)),int(round(8*self.screen_scale)))    #taşımayı gösterildikten sonra yapıyoruzki comboboxun sizehinti tam doğru sonucu verip yatayta tam ortalasın diye.
+        self.combobox.move(int(round(self.screen_w/2)-(self.combobox.sizeHint().width()/2)),int(4*self.screen_scale))    #taşımayı gösterildikten sonra yapıyoruzki comboboxun sizehinti tam doğru sonucu verip yatayta tam ortalasın diye.
         
     def closeEvent(self, event): 
         super().closeEvent(event)

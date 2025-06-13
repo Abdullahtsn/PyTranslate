@@ -43,7 +43,10 @@ Yani:
 
 Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyasını indirebilirsin:
 
-📥 [PyTranslate Kurulum Dosyasını İndir](https://github.com/Abdullahtsn/PyTranslate/releases/tag/v1.0.0)
+📘 [PyTranslate – Son Güncelleme Notları](https://github.com/Abdullahtsn/PyTranslate/releases/latest)  
+
+📥 [PyTranslate v1.0.2 – Kurulum Dosyasını İndir](https://github.com/Abdullahtsn/PyTranslate/releases/download/v1.0.2/PyTranslate_setup.exe)  
+
 
 > ⚠️ **Not:** Kurulum dosyası (`setup.exe`), PyTranslate’in bağımsız olarak çalışabilmesi için hazırlanmıştır.  
 > Yani Python ya da ek kütüphaneler sisteminde kurulu olmasa bile, bu kurulum dosyası sayesinde uygulamayı doğrudan çalıştırabilirsin.  
@@ -167,21 +170,23 @@ Tüm ortamlarda bağımsız çalışabilmesi için bağlantıdan kurulum dosyas�
 
 ## 🎨 Tema Galerisi - Theme Gallery
 <p style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-    <img src="app_image/thema.png" style="border-radius: 8px;" />
-    <img src="app_image/vertical_minimalist.png" style="height: 322; border-radius: 8px;" />
-    <img src="app_image/Cloudlight Bloom.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Dark Mocha.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Deep Blue Night.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Frosted Mint.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Golden Dawn.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Midnight Terminal.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Peach Cream.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Snowy pine.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Soft Dawn.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Sunset Isle.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Verdant Grove.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Violet Dawn.png" style="width: 48%; border-radius: 8px;" />
-    <img src="app_image/Violet Twilight.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/thema.png" style="width: 40%; border-radius: 8px;" />
+    <img src="app_image/thema2.png" style="width: 40%; border-radius: 8px;" />
+    <img src="app_image/vertical_minimalist.png" style="height: 322; border-radius: 8px" />
+    <img src="app_image/vertical_maximalist.png" style="height: 322; border-radius: 8px" />
+    <img src="app_image/1.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/2.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/3.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/4.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/5.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/6.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/7.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/8.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/9.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/10.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/11.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/12.png" style="width: 48%; border-radius: 8px;" />
+    <img src="app_image/13.png" style="width: 48%; border-radius: 8px;" />
 </p>
 
 --------------------------------------------
@@ -230,7 +235,10 @@ In other words:
 
 You can download the setup file from the link below to run independently on any system:
 
-📥 [Download PyTranslate Setup File](https://github.com/Abdullahtsn/PyTranslate/releases/tag/v1.0.0)
+📘 [PyTranslate – Release Notes](https://github.com/Abdullahtsn/PyTranslate/releases/latest)  
+
+📥 [PyTranslate v1.0.2 – Download Installer](https://github.com/Abdullahtsn/PyTranslate/releases/download/v1.0.2/PyTranslate_setup.exe)  
+
 
 > ⚠️ **Note:** The setup file (`setup.exe`) is prepared so that PyTranslate can run independently.  
 > That means even if Python or additional libraries are not installed on your system, you can run the application directly with this setup file.  

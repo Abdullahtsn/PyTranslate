@@ -34,12 +34,12 @@ class TranslateApp(QMainWindow):
         self.setWindowIcon(QIcon(QPixmap(os.path.join(self.path_temp, 'icon','icon.ico'))))
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)       #mainwindow için arka planı görünmez yapıyor sadece widgetler görünüyor.(frameleswindowhint ile birlikte kullanılıyor.)
-        self.toolbutton_size = (int(20*self.screen_scale), int(20*self.screen_scale))
+        self.toolbutton_size = (int(10*self.screen_scale), int(10*self.screen_scale))
         
         self.widgets_load()
         self.resize(QSize(self.toolbar.sizeHint()))      #başlangıçta sadece toolbarı göstercek şekilde açılması için.
         self.move_button_clicked()      #move butonuna tıklanınca pencerenin hareket etmesi için. bunu özel tanımlıyoruz çünkü pyqtnin hazır fonksiyonlarını override ediyoruz.
-        self.shortcut_widget()
+        self.shortcut_widget()  #bunu bu şekilde yapınca kullanıcıdan klavye kısayolu beklediği için virüs uyarısı veriyor diye kaldırıldı. -- !! tekrar denedim virüs uyarısı vermedi.
         self.animations_create()
         
 

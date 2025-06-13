@@ -33,8 +33,8 @@ class SpeechWidget(QWidget):
         self.combobox_dict = tool_and_translate_matching_base
         #self.pano = QApplication.clipboard()     #nadiren kullanılcağı için bu şekilde bellekte tutmak gereksiz. kopyala yapıştır butonlarında çağırmak en mantıklısı sürekli kullanmıycağımız için.
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
-        self.resize(int(540*self.screen_scale), int(456*self.screen_scale))
-        self.button_icon_size = (int(20*self.screen_scale), int(20*self.screen_scale))
+        self.resize(int(270*self.screen_scale), int(242*self.screen_scale))
+        self.button_icon_size = (int(10*self.screen_scale), int(10*self.screen_scale))
        
         self.install_icons()
         self.button_clicks()        #tüm pushbuttonları 'pushButton_' böyle başlat. 
@@ -48,7 +48,7 @@ class SpeechWidget(QWidget):
         self.ui.textEdit_source.installEventFilter(self)    #textedit source için oraya odaklıyken ki tuş basımlarını yakalayıp sistemin kendi ctrl + v kombosunu ezip kendi yöntemimizi ekliyoruz.çünkü;
                                                             #bunu yapmazsak vscoddan yada internetten bişey kopyalanınca oranın stilini ve yazı tipini falan alıyor öyle kopyalıyor.font ayarlarıyla beraber kopyalıyor yani.html içerinin hepsini alıyor.
                                                             #bizde bunu istemediğimiz için event filtrelemeye gönderip sadece texti alıp bunu yapıştırmasını söyledik ve sistemin ctrl + v fonksiyonunu override ettik.      
-        self.shortcut_widget()
+        self.shortcut_widget()         #kullanıcıdan klavye etkileşimi beklediği için kısayolları böyle tanımlayınca virüs uyarısı verdiği için kaldırdım. --!! tekrar denedim virüs uyarısı vermedi.
 
     def install_icons(self):
         self.ui.pushButton_change_language.setIcon(QIcon(os.path.join(self.path_temp, 'icon','lang_change.png')))
@@ -98,7 +98,7 @@ class SpeechWidget(QWidget):
         for combobox in [self.ui.comboBox_source, self.ui.comboBox_target]: 
             view = QListView()
             view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)    #comboboxun içine scrollbar eklemek için. (comboboxa eklenen itemler fazla olunca scrolbar yerine aşağıda ve yukarda buton çıkıyor.)
-            view.setViewportMargins(0,0,int(4*self.screen_scale),0) 
+            view.setViewportMargins(0,0,int(2*self.screen_scale),0) 
             combobox.setMaxVisibleItems(10)  #comboboxda aynı anda gösterilcek item sayısı sınırlama
             combobox.setView(view)
             combobox.setSizeAdjustPolicy(combobox.SizeAdjustPolicy.AdjustToContents)       #normalde comboboxun itemlerini değiştirince yeni itemlere göre combobuxu büyütüp küçültmüyordu, baştaki ayarlara göre sabit kalıyordu. oluştururkenki ayarlara göre yani. bu satır ile eklenen her öğeye göre boyutlanması yeniden yapılıyor.
@@ -136,12 +136,12 @@ class SpeechWidget(QWidget):
                 super().__init__()
                 self.setPointSizeF(int(size))
 
-        SpecialFontSize = SpecialFont(8*self.screen_scale)
+        SpecialFontSize = SpecialFont(4*self.screen_scale)
         self.ui.textEdit_source.setFont(SpecialFontSize)        
         self.ui.textEdit_target.setFont(SpecialFontSize)
 
     def layout_settings(self):
-        m_s_r = int(6*self.screen_scale)   #m_s_r ---> margin_spacer_ratio anlamında kısalttım
+        m_s_r = int(4*self.screen_scale)   #m_s_r ---> margin_spacer_ratio anlamında kısalttım
         self.setContentsMargins(m_s_r, 0, m_s_r, 0)     #burası text editlerin ana pencere kenarlarında sıfır olarak durmasını engellemek için yazıldı. yani hafif bi kenarlıkmış gibi görünmesi için
         self.ui.layout_toolbar.setContentsMargins(m_s_r, m_s_r, m_s_r, m_s_r)
         self.ui.layout_source_button.setContentsMargins(m_s_r, m_s_r, m_s_r, m_s_r)
@@ -152,8 +152,8 @@ class SpeechWidget(QWidget):
         self.ui.layout_target_button.setSpacing(m_s_r)
         self.ui.layout_combobox.setSpacing(m_s_r)
 
-        self.ui.textEdit_source.setViewportMargins(0,0,int(4*self.screen_scale),0)   #texteditin içinde metin scroolbara fazla yakın oluyordu ve paddingle marginle ayarlanmıyordu. bizde metni scrollbardan bu şekilde uzaklaştırıyoruz.
-        self.ui.textEdit_source.setViewportMargins(0,0,int(4*self.screen_scale),0)   #Soldan 0 px, Yukarıdan 0 px, Sağdan 20 px (yani metin scrollbar’dan 8 px uzağa çekilir) , Alttan 0 px
+        self.ui.textEdit_source.setViewportMargins(0,0,int(2*self.screen_scale),0)   #texteditin içinde metin scroolbara fazla yakın oluyordu ve paddingle marginle ayarlanmıyordu. bizde metni scrollbardan bu şekilde uzaklaştırıyoruz.
+        self.ui.textEdit_source.setViewportMargins(0,0,int(2*self.screen_scale),0)   #Soldan 0 px, Yukarıdan 0 px, Sağdan 20 px (yani metin scrollbar’dan 8 px uzağa çekilir) , Alttan 0 px
         
 
     def change_language_button_click(self):
@@ -187,15 +187,15 @@ class SpeechWidget(QWidget):
     def info_button_click(self):                #!!!!!!!buraya sonra açılır bi iletişim penceresi eklencek unutma
         if self.ui.pushButton_info.isChecked():
             self.ui.pushButton_change_language.setToolTip('Change Languages')
-            self.ui.pushButton_close.setToolTip('Close (ESC)')
+            self.ui.pushButton_close.setToolTip('Close ( ESC )')
             self.ui.pushButton_maximize.setToolTip('Maximize')
             self.ui.pushButton_minimize.setToolTip('Minimize')
             self.ui.pushButton_move.setToolTip('Move')
             self.ui.pushButton_info.setToolTip('Info')
             self.ui.pushButton_change_text.setToolTip('Change Texts')
-            self.ui.pushButton_correct_grammar.setToolTip('Correct Grammar (F1)')       #bu languagetool python ile yapılcak düzeltme. gramer düzelticek
-            self.ui.pushButton_correct_word.setToolTip('Correct Words (F2)')         #bu pyspecllchacker ile yapılcak düzeltme. sadece kelimeleri düzelticek
-            self.ui.pushButton_translate.setToolTip('Translate (ENTER)')
+            self.ui.pushButton_correct_grammar.setToolTip('Correct Grammar ( F1 )')       #bu languagetool python ile yapılcak düzeltme. gramer düzelticek
+            self.ui.pushButton_correct_word.setToolTip('Correct Words ( F2 )')         #bu pyspecllchacker ile yapılcak düzeltme. sadece kelimeleri düzelticek
+            self.ui.pushButton_translate.setToolTip('Translate ( ENTER )')
             self.ui.pushButton_copy_s.setToolTip('Copy')
             self.ui.pushButton_paste_s.setToolTip('Paste')
             self.ui.pushButton_clear_s.setToolTip('Clear')
@@ -333,8 +333,8 @@ class SpeechWidget(QWidget):
         return super().eventFilter(obj, event)  # Diğer her şeyi normal devam etsin
 
     def shortcut_widget(self):
-        '''QShortcut(QKeySequence('Esc'), self).activated.connect(self.ui.pushButton_close.click())'''        #bu şekilde yaparsak direk fonksiyon çalıştığı için hata veriyor o yüzden parantezleri koymuyoruz direk çalışmasın diye
-        '''QShortcut(QKeySequence('Enter'), self).activated.connect(self.ui.pushButton_translate.click)   #bu enter burda çalışmadığı için event filterde tanımlandı.'''
+        #QShortcut(QKeySequence('Esc'), self).activated.connect(self.ui.pushButton_close.click())       #bu şekilde yaparsak direk fonksiyon çalıştığı için hata veriyor o yüzden parantezleri koymuyoruz direk çalışmasın diye
+        #QShortcut(QKeySequence('Enter'), self).activated.connect(self.ui.pushButton_translate.click)   #bu enter burda çalışmadığı için event filterde tanımlandı.
         QShortcut(QKeySequence('Esc'), self).activated.connect(self.ui.pushButton_close.click)
         QShortcut(QKeySequence('F1'), self).activated.connect(self.ui.pushButton_correct_grammar.click)
         QShortcut(QKeySequence('F2'), self).activated.connect(self.ui.pushButton_correct_word.click)

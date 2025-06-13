@@ -18,7 +18,7 @@ class MsgBox(QMessageBox):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         #normalde anlık olarak oluşturup kullanıldıktan sonra bellekten silcektim setattiribute ile ama closeeventi tetiklemiyor o yöntem. en azından burda tetiklemiyor. o yüzden messagebox widgeti için referanslı bırakıyorum. silmeli değil, 
         
-        self.info_icon = QPixmap(os.path.join(self.path_temp, 'icon','info_msg.png')).scaled(int(40*self.screen_scale), int(40*self.screen_scale), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)    #keepaspectratio = oranı koruması için, smoothtransformation = daha yumuşak kaliteyle ölçmesi için
+        self.info_icon = QPixmap(os.path.join(self.path_temp, 'icon','info_msg.png')).scaled(int(20*self.screen_scale), int(20*self.screen_scale), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)    #keepaspectratio = oranı koruması için, smoothtransformation = daha yumuşak kaliteyle ölçmesi için
 
         self.setWindowTitle('PyTranslate Messages')
         self.setWindowIcon(QIcon(QPixmap(os.path.join(self.path_temp, 'icon','icon.ico'))))
@@ -29,8 +29,8 @@ class MsgBox(QMessageBox):
         self.button_ok = self.button(self.StandardButton.Ok)
         self.button_ok.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.button_ok.setIcon(QIcon(os.path.join(self.path_temp, 'icon','ok_msg.png')))
-        self.button_ok.setIconSize(QSize(int(16*self.screen_scale), int(16*self.screen_scale)))
-        self.setContentsMargins(0, 0, int(12*self.screen_scale), 0)
+        self.button_ok.setIconSize(QSize(int(8*self.screen_scale), int(8*self.screen_scale)))
+        self.setContentsMargins(0, 0, int(8*self.screen_scale), 0)
         self.move_button_click()
         
     def edit(self, text):     #her mesaj kutusunu ayrı ayrı oluşturmak yerine bir mesaj kutusunu dışardan gelcek verilerle güncelleyip bellek kullanımını azaltıcaz.
